@@ -1,0 +1,20 @@
+# docker-compose -f docker-compose-dev.yml up -d
+version: "3.3"
+services:
+  tgto_database:
+    image: postgres:10.3
+    container_name: tgto_database
+    restart: always
+    user: "${TGTO_SYSTEM_USER}"
+    environment:
+      POSTGRES_PASSWORD: "tgto"
+      POSTGRES_USER: "tgto"
+      POSTGRES_DB: "tgto"
+    volumes:
+     - ${TGTO_DATA}/pgdata:/var/lib/postgresql/data
+     - /etc/passwd:/etc/passwd:ro
+    ports:
+    - target: 5432
+      published: 5435
+      protocol: tcp
+      mode: host
