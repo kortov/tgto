@@ -26,7 +26,7 @@ class DefaultFeedHandlerFactory(
             val user = userDao.findByUrl(id)
                 ?: throw NotFoundException("Feed with this url not found.")
 
-            it.responseHeaders.get(Headers.CONTENT_TYPE_STRING).add("application/rss+xml")
+            it.responseHeaders.add(Headers.CONTENT_TYPE, "application/rss+xml")
             it.responseSender.send(feedBuilder.feed(user, 100))
         } catch (e: NotFoundException) {
             it.statusCode = StatusCodes.NOT_FOUND
