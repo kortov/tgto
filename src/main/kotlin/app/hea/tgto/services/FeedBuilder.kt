@@ -12,6 +12,7 @@ import com.rometools.rome.feed.synd.SyndFeedImpl
 import com.rometools.rome.io.SyndFeedOutput
 import java.io.StringWriter
 import java.time.Instant
+import java.time.format.DateTimeFormatter
 import java.util.Date
 
 /**
@@ -25,9 +26,10 @@ interface FeedBuilder {
 
 class RomeFeedBuilder(
     private val messageDao: DefaultCMessageDao,
-    private val userInfo: UserInfo
+    private val userInfo: UserInfo,
+    private val markdownService: MarkdownService
 ) : FeedBuilder {
-    override suspend fun feed(user: TgUser, limit: Int): String {
+    override suspend fun feed(user: TgUser, limit: Int): String = elastic {
         val messages = messageDao.list(user.userId, limit)
 
         val feed = SyndFeedImpl().apply {
@@ -43,22 +45,20 @@ class RomeFeedBuilder(
             entries = messages.map(::toSyndEntry)
         }
 
-        return elastic {
-            StringWriter().use { writer ->
-                val feedOutput = SyndFeedOutput()
-                feedOutput.output(feed, writer)
-                writer.buffer.toString()
-            }
+        StringWriter().use { writer ->
+            val feedOutput = SyndFeedOutput()
+            feedOutput.output(feed, writer)
+            writer.buffer.toString()
         }
     }
 
     private fun toSyndEntry(message: Message): SyndEntry {
         return SyndEntryImpl().apply {
-            title = message.message
+            title = message.created.toLocalDateTime().format(DateTimeFormatter.ISO_DATE_TIME)
             author = ""
             publishedDate = Date.from(message.created.toInstant())
             description = SyndContentImpl().also { content ->
-                content.value = message.message
+                content.value = markdownService.render(message.message)
             }
         }
     }

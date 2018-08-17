@@ -9,6 +9,7 @@ import app.hea.tgto.dao.DefaultCMessageDao
 import app.hea.tgto.dao.DefaultCUserDao
 import app.hea.tgto.logging.logger
 import app.hea.tgto.server.UndertowFeedServer
+import app.hea.tgto.services.CommonMarkMarkdownService
 import app.hea.tgto.services.DefaultJooqConfigFactory
 import app.hea.tgto.services.FlywayDatabaseMigrate
 import app.hea.tgto.services.HikariDataSourceFactory
@@ -49,8 +50,9 @@ object Application {
 
             val userInfo = DefaultUserInfo(appConfiguration)
             val uniquePathGenerator = UuidUniquePathGenerator()
+            val markdownService = CommonMarkMarkdownService()
 
-            val feedBuilder = RomeFeedBuilder(messageDao, userInfo)
+            val feedBuilder = RomeFeedBuilder(messageDao, userInfo, markdownService)
 
             UndertowFeedServer(shutdownManager, userDao, feedBuilder).run()
 
