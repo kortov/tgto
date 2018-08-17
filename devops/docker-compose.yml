@@ -1,0 +1,28 @@
+version: "3.3"
+services:
+  tgto:
+    image: irus/tgto:1.0.0-dev-b1 # get from ${TRAVIS_BUILD_NUMBER}
+    container_name: tgto
+    restart: always
+    ports:
+    - "8090:8080"
+    environment:
+      TGTO_OPTS: ${TGTO_OPTS}
+      TGTO_BOT_TOKEN: ${TGTO_BOT_TOKEN}
+      SENTRY_DSN: ${TGTO_SENTRY_DSN}
+      TGTO_ENV: ${TGTO_ENV}
+    depends_on:
+    - tgto_database
+  tgto_database:
+    image: postgres:10.3
+    container_name: tgto_database
+    restart: always
+    user: "${TGTO_SYSTEM_USER}"
+    environment:
+      POSTGRES_PASSWORD: "tgto"
+      POSTGRES_USER: "tgto"
+      POSTGRES_DB: "tgto"
+    volumes:
+    - ${TGTO_DATA}/pgdata:/var/lib/postgresql/data
+    - /etc/passwd:/etc/passwd:ro
+
