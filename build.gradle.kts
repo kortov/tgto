@@ -1,11 +1,16 @@
+import org.jetbrains.kotlin.gradle.dsl.Coroutines
+
 plugins {
     application
     kotlin("jvm") version "1.2.60"
 }
 
+kotlin.experimental.coroutines = Coroutines.ENABLE
+
 val tgBotsApiVersion: String by project
 val undertowVersion: String by project
 val coroutinesVersion: String by project
+val romeVersion: String by project
 
 val logbackVersion: String by project
 val slf4jVersion: String by project
@@ -24,6 +29,7 @@ dependencies {
     compile("org.telegram:telegrambots:$tgBotsApiVersion")
     compile("io.undertow:undertow-core:$undertowVersion")
     compile("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$coroutinesVersion")
+    compile("com.rometools:rome:$romeVersion")
 
     compile("ch.qos.logback:logback-classic:$logbackVersion")
     compile("org.slf4j:jul-to-slf4j:$slf4jVersion")
