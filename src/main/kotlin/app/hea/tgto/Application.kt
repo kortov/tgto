@@ -54,7 +54,7 @@ object Application {
 
             val feedBuilder = RomeFeedBuilder(messageDao, userInfo, markdownService)
 
-            UndertowFeedServer(shutdownManager, userDao, feedBuilder).run()
+            UndertowFeedServer(shutdownManager, userDao, feedBuilder, messageDao).run()
 
             val responseChannel = DefaultResponseChannel()
 

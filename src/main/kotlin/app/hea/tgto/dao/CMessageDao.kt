@@ -11,6 +11,7 @@ import org.jooq.impl.DSL
  */
 interface CMessageDao {
     suspend fun insert(message: Message)
+    suspend fun getById(id: Long): Message?
     suspend fun list(userId: Long, limit: Int): List<Message>
 }
 
@@ -20,6 +21,10 @@ class DefaultCMessageDao constructor(
 
     override suspend fun insert(message: Message) = elastic {
         messageDao.insert(message)
+    }
+
+    override suspend fun getById(id: Long): Message? {
+        return messageDao.fetchOneById(id)
     }
 
     override suspend fun list(userId: Long, limit: Int): List<Message> {

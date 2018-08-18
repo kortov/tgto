@@ -1,6 +1,7 @@
 package app.hea.tgto
 
 import app.hea.tgto.configuration.AppConfiguration
+import app.heap.tgto.db.tables.pojos.Message
 import app.heap.tgto.db.tables.pojos.TgUser
 
 /**
@@ -10,6 +11,7 @@ import app.heap.tgto.db.tables.pojos.TgUser
  */
 interface UserInfo {
     fun getFeedUrl(user: TgUser): String
+    fun getFeedItemUrl(user: TgUser, message: Message): String
 }
 
 class DefaultUserInfo(
@@ -17,5 +19,9 @@ class DefaultUserInfo(
 ) : UserInfo {
     override fun getFeedUrl(user: TgUser): String {
         return "${appConfiguration.baseUrl}rss/${user.url}"
+    }
+
+    override fun getFeedItemUrl(user: TgUser, message: Message): String {
+        return "${appConfiguration.baseUrl}rss/${user.url}/${message.id}"
     }
 }

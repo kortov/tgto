@@ -42,7 +42,7 @@ class RomeFeedBuilder(
             language = "en"
             generator = "ToRssBot"
             publishedDate = Date.from(Instant.now())
-            entries = messages.map(::toSyndEntry)
+            entries = messages.map { toSyndEntry(user, it) }
         }
 
         StringWriter().use { writer ->
@@ -52,9 +52,10 @@ class RomeFeedBuilder(
         }
     }
 
-    private fun toSyndEntry(message: Message): SyndEntry {
+    private fun toSyndEntry(user: TgUser, message: Message): SyndEntry {
         return SyndEntryImpl().apply {
             title = message.created.toLocalDateTime().format(DateTimeFormatter.ISO_DATE_TIME)
+            link = userInfo.getFeedItemUrl(user, message)
             author = ""
             publishedDate = Date.from(message.created.toInstant())
             description = SyndContentImpl().also { content ->
