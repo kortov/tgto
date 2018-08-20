@@ -3,6 +3,7 @@ package app.hea.tgto.server
 import app.hea.tgto.coroutines.serverContext
 import app.hea.tgto.dao.CMessageDao
 import app.hea.tgto.dao.CUserDao
+import app.hea.tgto.services.MarkdownService
 import io.undertow.util.Headers
 import io.undertow.util.StatusCodes
 
@@ -17,7 +18,8 @@ interface FeedItemHandlerFactory {
 
 class DefaultFeedItemHandlerFactory(
     private val userDao: CUserDao,
-    private val messageDao: CMessageDao
+    private val messageDao: CMessageDao,
+    private val markdownService: MarkdownService
 ) : FeedHandlerFactory {
     override fun handler() = CoroutinesHandler(serverContext) {
         try {
@@ -44,7 +46,7 @@ class DefaultFeedItemHandlerFactory(
               <title>Message: ${message.id}</title>
             </head>
             <body>
-              ${message.message}
+              ${markdownService.render(message.message)}
             </body>
             </html>
             """.trimIndent())
