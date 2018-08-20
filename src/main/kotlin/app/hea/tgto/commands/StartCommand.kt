@@ -33,7 +33,7 @@ class StartCommand(
         val chatId = update.message.chatId
         responseChannel.send(
             chatId = chatId,
-            message = "Hello! Here your rss feed. Just executeAsync me messages, and they'll appear in your feed."
+            message = "Hello! Here your rss feed. Just send me messages, and they'll appear in your personal feed."
         )
         responseChannel.send(
             chatId = chatId,
