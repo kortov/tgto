@@ -2,6 +2,7 @@ package app.hea.tgto
 
 import app.hea.tgto.commands.MyUrlCommand
 import app.hea.tgto.commands.NewUrlCommand
+import app.hea.tgto.commands.PingPongCommand
 import app.hea.tgto.commands.SaveCommand
 import app.hea.tgto.commands.StartCommand
 import app.hea.tgto.configuration.DefaultAppConfiguration
@@ -62,9 +63,10 @@ object Application {
             val myUrlCommand = MyUrlCommand(userDao, responseChannel, userInfo)
             val newUrlCommand = NewUrlCommand(userDao, responseChannel, uniquePathGenerator, userInfo)
             val startCommand = StartCommand(userDao, responseChannel, uniquePathGenerator, userInfo)
+            val pingPongCommand = PingPongCommand(responseChannel)
 
             val receiveChannel = ActorReceiveChannel(
-                commands = listOf(myUrlCommand, newUrlCommand, startCommand),
+                commands = listOf(myUrlCommand, newUrlCommand, startCommand, pingPongCommand),
                 fallbackCommand = saveCommand
             )
 
