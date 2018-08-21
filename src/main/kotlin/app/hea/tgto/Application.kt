@@ -53,7 +53,7 @@ object Application {
             val uniquePathGenerator = UuidUniquePathGenerator()
             val markdownService = CommonMarkMarkdownService()
 
-            val feedBuilder = RomeFeedBuilder(messageDao, userInfo, markdownService)
+            val feedBuilder = RomeFeedBuilder(messageDao, userInfo, appConfiguration, markdownService)
 
             UndertowFeedServer(shutdownManager, userDao, feedBuilder, messageDao, markdownService).run()
 
