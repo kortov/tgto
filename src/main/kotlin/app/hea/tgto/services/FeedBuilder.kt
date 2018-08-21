@@ -14,7 +14,6 @@ import com.rometools.rome.feed.synd.SyndImageImpl
 import com.rometools.rome.io.SyndFeedOutput
 import java.io.StringWriter
 import java.time.Instant
-import java.time.format.DateTimeFormatter
 import java.util.Date
 
 /**
@@ -60,7 +59,7 @@ class RomeFeedBuilder(
 
     private fun toSyndEntry(user: TgUser, message: Message): SyndEntry {
         return SyndEntryImpl().apply {
-            title = message.created.toLocalDateTime().format(DateTimeFormatter.ISO_DATE_TIME)
+            title = message.message.lineSequence().first()
             link = userInfo.getFeedItemUrl(user, message)
             author = user.userId.toString()
             publishedDate = Date.from(message.created.toInstant())
