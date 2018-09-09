@@ -15,7 +15,7 @@ import java.time.Instant
 class SaveCommand(
     private val messageDao: CMessageDao,
     private val responseChannel: ResponseChannel
-    ) : Command {
+) : Command {
     override val name = "/save"
 
     override suspend fun handler(update: Update) {

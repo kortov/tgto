@@ -17,7 +17,7 @@ interface CMessageDao {
 
 class DefaultCMessageDao constructor(
     private val messageDao: MessageDao
-): CMessageDao {
+) : CMessageDao {
 
     override suspend fun insert(message: Message) = elastic {
         messageDao.insert(message)
