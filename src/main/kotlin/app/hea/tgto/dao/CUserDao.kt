@@ -1,6 +1,7 @@
 package app.hea.tgto.dao
 
 import app.hea.tgto.coroutines.elastic
+import app.heap.tgto.db.tables.TgUser.TG_USER
 import app.heap.tgto.db.tables.daos.TgUserDao
 import app.heap.tgto.db.tables.pojos.TgUser
 
@@ -23,9 +24,7 @@ class DefaultCUserDao(
     }
 
     override suspend fun create(user: TgUser): Unit = elastic {
-        if (userDao.fetchOneByUserId(user.userId) == null) {
-            userDao.insert(user)
-        }
+        userDao.insert(user)
     }
 
     override suspend fun findByUserId(userId: Long): TgUser? = elastic {
@@ -33,7 +32,7 @@ class DefaultCUserDao(
     }
 
     override suspend fun findByUrl(url: String): TgUser? = elastic {
-        userDao.fetchByUrl(url).find { it.url == url }
+        userDao.fetchOne(TG_USER.URL, url)
     }
 }
 
