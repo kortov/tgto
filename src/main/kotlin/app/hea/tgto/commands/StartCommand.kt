@@ -24,11 +24,15 @@ class StartCommand(
     override suspend fun handler(update: Update) {
         LOGGER.info("""User "${update.message.from.userName}" join.""")
 
-        val user = TgUser().also {
-            it.url = pathGenerator.get()
-            it.userId = update.message.from.id.toLong()
+        val userId = update.message.from.id.toLong()
+
+        val user = userDao.findByUserId(userId) ?: run {
+            TgUser().also {
+                it.url = pathGenerator.get()
+                it.userId = userId
+                userDao.create(it)
+            }
         }
-        userDao.create(user)
 
         val chatId = update.message.chatId
         responseChannel.send(
