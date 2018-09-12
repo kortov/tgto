@@ -3,6 +3,7 @@ package app.hea.tgto
 import app.hea.tgto.commands.Command
 import app.hea.tgto.coroutines.serverContext
 import app.hea.tgto.logging.logger
+import kotlinx.coroutines.experimental.GlobalScope
 import kotlinx.coroutines.experimental.channels.SendChannel
 import kotlinx.coroutines.experimental.channels.actor
 import org.telegram.telegrambots.meta.api.objects.Update
@@ -22,7 +23,7 @@ class ActorReceiveChannel(
 ) : ReceiveChannel {
     private val _commands = commands.associate { it.name to it }
 
-    override val channel = actor<Update>(context = serverContext) {
+    override val channel = GlobalScope.actor<Update>(context = serverContext) {
         for (update in this.channel) {
             onReceive(update)
         }

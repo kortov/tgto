@@ -3,6 +3,7 @@ package app.hea.tgto
 import app.hea.tgto.configuration.AppConfiguration
 import app.hea.tgto.coroutines.coExecute
 import app.hea.tgto.coroutines.serverContext
+import kotlinx.coroutines.experimental.GlobalScope
 import kotlinx.coroutines.experimental.channels.Channel
 import kotlinx.coroutines.experimental.channels.SendChannel
 import kotlinx.coroutines.experimental.launch
@@ -24,7 +25,7 @@ class TgtoBot(
 
     init {
         val sender = this
-        launch(serverContext) {
+        GlobalScope.launch(serverContext) {
             for (message in responseChannel) {
                 sender.coExecute(message)
             }
@@ -34,7 +35,7 @@ class TgtoBot(
     override fun onUpdateReceived(update: Update) {
         if (shutdownManager.isShutdown) return
 
-        launch(serverContext) {
+        GlobalScope.launch(serverContext) {
             receiveChannel.send(update)
         }
     }

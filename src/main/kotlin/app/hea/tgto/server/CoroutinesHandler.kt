@@ -4,6 +4,7 @@ import io.undertow.server.HttpHandler
 import io.undertow.server.HttpServerExchange
 import io.undertow.util.SameThreadExecutor
 import kotlinx.coroutines.experimental.CoroutineStart
+import kotlinx.coroutines.experimental.GlobalScope
 import kotlinx.coroutines.experimental.launch
 import kotlin.coroutines.experimental.CoroutineContext
 
@@ -18,7 +19,7 @@ class CoroutinesHandler(
 ) : HttpHandler {
     override fun handleRequest(exchange: HttpServerExchange) {
         exchange.dispatch(SameThreadExecutor.INSTANCE, Runnable {
-            launch(
+            GlobalScope.launch(
                 context = context,
                 start = CoroutineStart.UNDISPATCHED
             ) {

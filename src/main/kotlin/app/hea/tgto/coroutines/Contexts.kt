@@ -1,5 +1,6 @@
 package app.hea.tgto.coroutines
 
+import kotlinx.coroutines.experimental.CoroutineScope
 import kotlinx.coroutines.experimental.CoroutineStart
 import kotlinx.coroutines.experimental.asCoroutineDispatcher
 import kotlinx.coroutines.experimental.newFixedThreadPoolContext
@@ -42,5 +43,5 @@ val elasticContext = Executors.newCachedThreadPool(threadFactory).asCoroutineDis
  */
 suspend fun <T> elastic(
     start: CoroutineStart = CoroutineStart.DEFAULT,
-    block: suspend () -> T
+    block: suspend CoroutineScope.() -> T
 ): T = withContext(elasticContext, start, block)
