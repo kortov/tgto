@@ -44,7 +44,9 @@ class DefaultShutdownManager : ShutdownManager {
 
     override val isShutdown = _isShutdown.get()
 
-    private val LOGGER = logger<DefaultShutdownManager>()
+    companion object {
+        private val LOGGER = logger<DefaultShutdownManager>()
+    }
 }
 
 
