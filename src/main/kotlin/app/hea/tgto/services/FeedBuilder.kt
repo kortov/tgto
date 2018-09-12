@@ -57,7 +57,7 @@ class RomeFeedBuilder(
         }
     }
 
-    private fun toSyndEntry(user: TgUser, message: Message): SyndEntry {
+    private suspend fun toSyndEntry(user: TgUser, message: Message): SyndEntry {
         return SyndEntryImpl().apply {
             title = message.message.lineSequence().first()
             link = userInfo.getFeedItemUrl(user, message)

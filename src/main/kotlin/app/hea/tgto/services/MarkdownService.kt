@@ -1,5 +1,6 @@
 package app.hea.tgto.services
 
+import app.hea.tgto.coroutines.elastic
 import org.commonmark.parser.Parser
 import org.commonmark.renderer.html.HtmlRenderer
 
@@ -9,15 +10,15 @@ import org.commonmark.renderer.html.HtmlRenderer
  * @author Ruslan Ibragimov
  */
 interface MarkdownService {
-    fun render(md: String): String
+    suspend fun render(md: String): String
 }
 
 class CommonMarkMarkdownService : MarkdownService {
     private val parser = Parser.builder().build()
     private val renderer = HtmlRenderer.builder().build()
 
-    override fun render(md: String): String {
+    override suspend fun render(md: String): String = elastic {
         val document = parser.parse(md)
-        return renderer.render(document)
+        renderer.render(document)
     }
 }
