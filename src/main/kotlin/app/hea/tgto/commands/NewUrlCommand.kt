@@ -1,8 +1,8 @@
 package app.hea.tgto.commands
 
 import app.hea.tgto.ResponseChannel
-import app.hea.tgto.UniquePathGenerator
-import app.hea.tgto.UserInfo
+import app.hea.tgto.services.UniquePathGenerator
+import app.hea.tgto.services.UserInfo
 import app.hea.tgto.dao.CUserDao
 import org.telegram.telegrambots.meta.api.objects.Update
 

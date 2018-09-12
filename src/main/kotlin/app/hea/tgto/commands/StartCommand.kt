@@ -1,8 +1,8 @@
 package app.hea.tgto.commands
 
 import app.hea.tgto.ResponseChannel
-import app.hea.tgto.UniquePathGenerator
-import app.hea.tgto.UserInfo
+import app.hea.tgto.services.UniquePathGenerator
+import app.hea.tgto.services.UserInfo
 import app.hea.tgto.dao.CUserDao
 import app.hea.tgto.logging.logger
 import app.heap.tgto.db.tables.pojos.TgUser

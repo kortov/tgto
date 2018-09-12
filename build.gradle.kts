@@ -12,6 +12,7 @@ val undertowVersion: String by project
 val coroutinesVersion: String by project
 val romeVersion: String by project
 val commonmarkVersion: String by project
+val koinVersion: String by project
 
 val logbackVersion: String by project
 val slf4jVersion: String by project
@@ -32,6 +33,8 @@ dependencies {
     compile("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$coroutinesVersion")
     compile("com.rometools:rome:$romeVersion")
     compile("com.atlassian.commonmark:commonmark:$commonmarkVersion")
+    compile("org.koin:koin-core:$koinVersion")
+    compile("org.koin:koin-reflect:$koinVersion")
 
     compile("ch.qos.logback:logback-classic:$logbackVersion")
     compile("org.slf4j:jul-to-slf4j:$slf4jVersion")

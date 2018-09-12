@@ -1,6 +1,6 @@
 package app.hea.tgto
 
-import app.hea.tgto.commands.Command
+import app.hea.tgto.commands.BotCommands
 import app.hea.tgto.coroutines.serverContext
 import app.hea.tgto.logging.logger
 import kotlinx.coroutines.experimental.GlobalScope
@@ -18,11 +18,8 @@ interface ReceiveChannel {
 }
 
 class ActorReceiveChannel(
-    private val commands: List<Command>,
-    private val fallbackCommand: Command
+    private val commands: BotCommands
 ) : ReceiveChannel {
-    private val _commands = commands.associate { it.name to it }
-
     override val channel = GlobalScope.actor<Update>(context = serverContext) {
         for (update in this.channel) {
             onReceive(update)
@@ -36,7 +33,7 @@ class ActorReceiveChannel(
 
         // Accept messages only from private chat with bot
         if (message.chat.id == userId && message.text != null) {
-            val command = _commands.getOrDefault(message.text, fallbackCommand)
+            val command = commands.command(message.text)
             command.handler(update)
         }
     }

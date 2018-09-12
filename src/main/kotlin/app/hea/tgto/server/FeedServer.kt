@@ -1,10 +1,10 @@
 package app.hea.tgto.server
 
-import app.hea.tgto.DefaultShutdownManager
 import app.hea.tgto.dao.CMessageDao
 import app.hea.tgto.dao.CUserDao
 import app.hea.tgto.services.FeedBuilder
 import app.hea.tgto.services.MarkdownService
+import app.hea.tgto.services.ShutdownManager
 import io.undertow.Undertow
 import io.undertow.server.RoutingHandler
 import io.undertow.server.handlers.resource.ClassPathResourceManager
@@ -20,7 +20,7 @@ interface FeedServer {
 }
 
 class UndertowFeedServer(
-    private val shutdownManager: DefaultShutdownManager,
+    private val shutdownManager: ShutdownManager,
     private val userDao: CUserDao,
     private val feedBuilder: FeedBuilder,
     private val messageDao: CMessageDao,
@@ -34,6 +34,7 @@ class UndertowFeedServer(
             it.get("/rss/{id}", feedHandler)
             it.get("/rss/{id}/{itemId}", feedItemHandler)
         }
+
         val rootHandler = ResourceHandler(
             ClassPathResourceManager(this::class.java.classLoader, "public"),
             routingHandler

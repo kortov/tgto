@@ -1,6 +1,5 @@
 package app.hea.tgto.services
 
-import app.hea.tgto.ShutdownManager
 import app.hea.tgto.configuration.AppConfiguration
 import com.zaxxer.hikari.HikariDataSource
 import javax.sql.DataSource

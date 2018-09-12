@@ -3,6 +3,7 @@ package app.hea.tgto
 import app.hea.tgto.configuration.AppConfiguration
 import app.hea.tgto.coroutines.coExecute
 import app.hea.tgto.coroutines.serverContext
+import app.hea.tgto.services.ShutdownManager
 import kotlinx.coroutines.experimental.GlobalScope
 import kotlinx.coroutines.experimental.channels.Channel
 import kotlinx.coroutines.experimental.channels.SendChannel

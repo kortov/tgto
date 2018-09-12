@@ -1,4 +1,4 @@
-package app.hea.tgto
+package app.hea.tgto.services
 
 import app.hea.tgto.configuration.AppConfiguration
 import app.heap.tgto.db.tables.pojos.Message
