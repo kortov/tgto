@@ -23,12 +23,12 @@ class DefaultCMessageDao constructor(
         messageDao.insert(message)
     }
 
-    override suspend fun getById(id: Long): Message? {
-        return messageDao.fetchOneById(id)
+    override suspend fun getById(id: Long): Message? = elastic {
+        messageDao.fetchOneById(id)
     }
 
-    override suspend fun list(userId: Long, limit: Int): List<Message> {
-        return DSL.using(messageDao.configuration())
+    override suspend fun list(userId: Long, limit: Int): List<Message> = elastic {
+        DSL.using(messageDao.configuration())
             .selectFrom(MESSAGE)
             .where(MESSAGE.USER_ID.equal(userId))
             .limit(limit)
