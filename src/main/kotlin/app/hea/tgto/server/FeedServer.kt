@@ -1,6 +1,6 @@
 package app.hea.tgto.server
 
-import app.hea.tgto.DefaultShutdownManager
+import app.hea.tgto.ShutdownManager
 import app.hea.tgto.dao.CMessageDao
 import app.hea.tgto.dao.CUserDao
 import app.hea.tgto.services.FeedBuilder
@@ -20,7 +20,7 @@ interface FeedServer {
 }
 
 class UndertowFeedServer(
-    private val shutdownManager: DefaultShutdownManager,
+    private val shutdownManager: ShutdownManager,
     private val userDao: CUserDao,
     private val feedBuilder: FeedBuilder,
     private val messageDao: CMessageDao,

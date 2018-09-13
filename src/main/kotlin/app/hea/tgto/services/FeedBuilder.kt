@@ -3,7 +3,7 @@ package app.hea.tgto.services
 import app.hea.tgto.UserInfo
 import app.hea.tgto.configuration.AppConfiguration
 import app.hea.tgto.coroutines.elastic
-import app.hea.tgto.dao.DefaultCMessageDao
+import app.hea.tgto.dao.CMessageDao
 import app.heap.tgto.db.tables.pojos.Message
 import app.heap.tgto.db.tables.pojos.TgUser
 import com.rometools.rome.feed.synd.SyndContentImpl
@@ -26,7 +26,7 @@ interface FeedBuilder {
 }
 
 class RomeFeedBuilder(
-    private val messageDao: DefaultCMessageDao,
+    private val messageDao: CMessageDao,
     private val userInfo: UserInfo,
     private val configuration: AppConfiguration,
     private val markdownService: MarkdownService
