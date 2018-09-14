@@ -14,7 +14,7 @@ services:
     depends_on:
     - tgto_database
   tgto_database:
-    image: postgres:10.3
+    image: postgres:10.5
     container_name: tgto_database
     restart: always
     user: "${TGTO_SYSTEM_USER}"
