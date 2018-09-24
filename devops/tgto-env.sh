@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export TGTO_RELEASE="b"
 export TGTO_ENV="prod"
 export TGTO_BOT_TOKEN=""
 export TGTO_DATA=""

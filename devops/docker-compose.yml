@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   tgto:
-    image: irus/tgto:1.0.0-dev-b1 # get from ${TRAVIS_BUILD_NUMBER}
+    image: heapy/tgto:${TGTO_RELEASE}
     container_name: tgto
     restart: always
     ports:
@@ -10,7 +10,8 @@ services:
       TGTO_OPTS: ${TGTO_OPTS}
       TGTO_BOT_TOKEN: ${TGTO_BOT_TOKEN}
       SENTRY_DSN: ${TGTO_SENTRY_DSN}
-      TGTO_ENV: ${TGTO_ENV}
+      SENTRY_RELEASE: ${TGTO_RELEASE}
+      SENTRY_ENVIRONMENT: ${TGTO_ENV}
     depends_on:
     - tgto_database
   tgto_database:

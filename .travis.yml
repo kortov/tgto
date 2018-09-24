@@ -10,7 +10,7 @@ jdk:
 
 script:
   - ./gradlew check installDist
-  - docker build -t "irus/tgto:1.0.0-dev-b${TRAVIS_BUILD_NUMBER}" ./
+  - docker build -t "heapy/tgto:b${TRAVIS_BUILD_NUMBER}" ./
 
 deploy:
   provider: script
@@ -19,9 +19,9 @@ deploy:
     branch: master
 
 before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -f  $HOME/.gradle/caches/*/fileHashes/fileHashes.lock
-  - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
+  - rm -f  "${HOME}/.gradle/caches/modules-2/modules-2.lock"
+  - rm -f  "${HOME}/.gradle/caches/*/fileHashes/fileHashes.lock"
+  - rm -rf "${HOME}/.gradle/caches/*/plugin-resolution/"
 
 cache:
   directories:

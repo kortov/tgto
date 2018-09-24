@@ -37,10 +37,10 @@ class DefaultDataSourceConfiguration(
 ) : DataSourceConfiguration
 
 fun <T> byEnv(dev: T, prod: T): T {
-    val env = getenv("TGTO_ENV") ?: "dev"
+    val env = getenv("SENTRY_ENVIRONMENT") ?: "dev"
     return when (env) {
         "prod" -> prod
         "dev" -> dev
-        else -> throw RuntimeException("Set TGTO_ENVO either to 'dev' or 'prod'.")
+        else -> throw RuntimeException("Set SENTRY_ENVIRONMENT either to 'dev' or 'prod'.")
     }
 }
