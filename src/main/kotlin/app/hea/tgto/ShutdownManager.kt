@@ -1,7 +1,7 @@
 package app.hea.tgto
 
+import io.heapy.integration.slf4j.logger
 import app.hea.tgto.coroutines.elasticContext
-import app.hea.tgto.logging.logger
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.runBlocking
 import java.util.concurrent.atomic.AtomicBoolean

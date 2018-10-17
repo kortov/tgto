@@ -1,5 +1,6 @@
 package app.hea.tgto
 
+import io.heapy.integration.slf4j.logger
 import app.hea.tgto.commands.MyUrlCommand
 import app.hea.tgto.commands.NewUrlCommand
 import app.hea.tgto.commands.PingPongCommand
@@ -8,7 +9,6 @@ import app.hea.tgto.commands.StartCommand
 import app.hea.tgto.configuration.DefaultAppConfiguration
 import app.hea.tgto.dao.DefaultCMessageDao
 import app.hea.tgto.dao.DefaultCUserDao
-import app.hea.tgto.logging.logger
 import app.hea.tgto.server.UndertowFeedServer
 import app.hea.tgto.services.CommonMarkMarkdownService
 import app.hea.tgto.services.DefaultJooqConfigFactory

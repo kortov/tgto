@@ -2,7 +2,7 @@ package app.hea.tgto
 
 import app.hea.tgto.commands.Command
 import app.hea.tgto.coroutines.serverContext
-import app.hea.tgto.logging.logger
+import io.heapy.integration.slf4j.logger
 import kotlinx.coroutines.experimental.GlobalScope
 import kotlinx.coroutines.experimental.channels.SendChannel
 import kotlinx.coroutines.experimental.channels.actor

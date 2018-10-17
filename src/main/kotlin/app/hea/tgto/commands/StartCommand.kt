@@ -4,8 +4,8 @@ import app.hea.tgto.ResponseChannel
 import app.hea.tgto.UniquePathGenerator
 import app.hea.tgto.UserInfo
 import app.hea.tgto.dao.CUserDao
-import app.hea.tgto.logging.logger
 import app.heap.tgto.db.tables.pojos.TgUser
+import io.heapy.integration.slf4j.logger
 import org.telegram.telegrambots.meta.api.objects.Update
 
 /**
