@@ -37,14 +37,19 @@ class UndertowFeedServer(
         val rootHandler = ResourceHandler(
             ClassPathResourceManager(this::class.java.classLoader, "public"),
             routingHandler
-        )
+        ).setCacheTime(YEAR_IN_SECONDS)
 
         val undertow = Undertow.builder()
             .addHttpListener(8080, "0.0.0.0", rootHandler)
+            .setWorkerThreads(1) // All actual work happens in IO or on coroutines dispatcher
             .build()
 
         undertow.start()
 
         shutdownManager.onShutdown { undertow.stop() }
+    }
+
+    companion object {
+        private const val YEAR_IN_SECONDS: Int = 60 * 60 * 24 * 365
     }
 }

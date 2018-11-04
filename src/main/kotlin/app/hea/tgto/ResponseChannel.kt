@@ -1,6 +1,6 @@
 package app.hea.tgto
 
-import kotlinx.coroutines.experimental.channels.Channel
+import kotlinx.coroutines.channels.Channel
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage
 
 /**

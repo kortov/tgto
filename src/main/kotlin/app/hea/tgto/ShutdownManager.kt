@@ -1,9 +1,9 @@
 package app.hea.tgto
 
 import io.heapy.integration.slf4j.logger
-import app.hea.tgto.coroutines.elasticContext
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.concurrent.thread
 
@@ -25,7 +25,7 @@ class DefaultShutdownManager : ShutdownManager {
             LOGGER.info("Stopping bot")
             runBlocking {
                 callbacks.map {
-                    async(elasticContext) {
+                    async(Dispatchers.Default) {
                         it()
                     }
                 }.forEach { it.await() }

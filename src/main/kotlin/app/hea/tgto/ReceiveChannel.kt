@@ -3,9 +3,9 @@ package app.hea.tgto
 import app.hea.tgto.commands.Command
 import app.hea.tgto.coroutines.serverContext
 import io.heapy.integration.slf4j.logger
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.channels.SendChannel
-import kotlinx.coroutines.experimental.channels.actor
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.channels.SendChannel
+import kotlinx.coroutines.channels.actor
 import org.telegram.telegrambots.meta.api.objects.Update
 
 /**

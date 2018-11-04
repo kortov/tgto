@@ -29,7 +29,6 @@ class DefaultFeedItemHandlerFactory(
                 ?: throw NotFoundException("Please check your url.")
             val user = userDao.findByUrl(id)
                 ?: throw NotFoundException("Feed with this url not found.")
-
             val message = messageDao.getById(itemId)
                 ?: throw NotFoundException("Message with this id not found.")
 

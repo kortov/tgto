@@ -1,6 +1,5 @@
 package app.hea.tgto
 
-import io.heapy.integration.slf4j.logger
 import app.hea.tgto.commands.MyUrlCommand
 import app.hea.tgto.commands.NewUrlCommand
 import app.hea.tgto.commands.PingPongCommand
@@ -17,6 +16,7 @@ import app.hea.tgto.services.HikariDataSourceFactory
 import app.hea.tgto.services.RomeFeedBuilder
 import app.heap.tgto.db.tables.daos.MessageDao
 import app.heap.tgto.db.tables.daos.TgUserDao
+import io.heapy.integration.slf4j.logger
 import org.telegram.telegrambots.ApiContextInitializer
 import org.telegram.telegrambots.meta.TelegramBotsApi
 

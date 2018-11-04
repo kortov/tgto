@@ -3,10 +3,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     application
-    kotlin("jvm") version "1.2.71"
+    kotlin("jvm") version "1.3.0"
 }
-
-kotlin.experimental.coroutines = Coroutines.ENABLE
 
 tasks.withType<JavaCompile> {
     sourceCompatibility = "1.8"
@@ -16,6 +14,8 @@ tasks.withType<JavaCompile> {
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
+
+val komodoVersion: String by project
 
 val tgBotsApiVersion: String by project
 val undertowVersion: String by project
@@ -43,7 +43,9 @@ dependencies {
     compile("com.rometools:rome:$romeVersion")
     compile("com.atlassian.commonmark:commonmark:$commonmarkVersion")
 
-    compile("io.heapy.komodo.integration:komodo-slf4j:0.0.1-dev-b35")
+    compile("io.heapy.komodo:komodo-core-concurrent:$komodoVersion")
+    compile("io.heapy.komodo.integration:komodo-slf4j:$komodoVersion")
+    compile("io.heapy.komodo.integration:komodo-datasource-hikaricp:$komodoVersion")
 
     compile("ch.qos.logback:logback-classic:$logbackVersion")
     compile("org.slf4j:jul-to-slf4j:$slf4jVersion")
