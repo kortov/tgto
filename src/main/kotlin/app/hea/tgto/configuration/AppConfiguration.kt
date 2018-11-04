@@ -15,7 +15,7 @@ interface AppConfiguration {
 class DefaultAppConfiguration(
     override val token: String = getenv("TGTO_BOT_TOKEN"),
     override val name: String = getenv("TGTO_BOT_NAME") ?: "ToRssBot",
-    override val baseUrl: String = getenv("TGTO_BASE_URL") ?: "https://kotbot.app/tgto/",
+    override val baseUrl: String = getenv("TGTO_BASE_URL") ?: "http://localhost:8080/",
     override val ds: DataSourceConfiguration = DefaultDataSourceConfiguration()
 ) : AppConfiguration
 
