@@ -13,7 +13,7 @@ import java.util.concurrent.Executors
  * @author Ruslan Ibragimov
  */
 val serverContext = Executors.newFixedThreadPool(
-    Runtime.getRuntime().availableProcessors() - 1,
+    (Runtime.getRuntime().availableProcessors() - 1).coerceAtLeast(1),
     KomodoThreadFactory(nameProducer = { "tgto-server-$it" })
 ).asCoroutineDispatcher()
 
