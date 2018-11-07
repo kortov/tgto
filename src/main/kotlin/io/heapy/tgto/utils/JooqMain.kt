@@ -1,4 +1,4 @@
-package io.heapy.tgto
+package io.heapy.tgto.utils
 
 import org.jooq.codegen.GenerationTool
 import org.jooq.meta.jaxb.Configuration
