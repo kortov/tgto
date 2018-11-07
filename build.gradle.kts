@@ -70,5 +70,5 @@ repositories {
 
 application {
     applicationName = "tgto"
-    mainClassName = "app.hea.tgto.Application"
+    mainClassName = "io.heapy.tgto.Application"
 }
