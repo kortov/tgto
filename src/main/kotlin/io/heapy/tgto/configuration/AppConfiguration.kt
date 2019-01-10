@@ -14,8 +14,8 @@ interface AppConfiguration {
 
 class DefaultAppConfiguration(
     override val token: String = getenv("TGTO_BOT_TOKEN"),
-    override val name: String = getenv("TGTO_BOT_NAME") ?: "ToRssBot",
-    override val baseUrl: String = getenv("TGTO_BASE_URL") ?: "http://localhost:8080/",
+    override val name: String = getenv("TGTO_BOT_NAME"),
+    override val baseUrl: String = getenv("TGTO_BASE_URL"),
     override val ds: DataSourceConfiguration = DefaultDataSourceConfiguration()
 ) : AppConfiguration
 
@@ -27,20 +27,8 @@ interface DataSourceConfiguration {
 }
 
 class DefaultDataSourceConfiguration(
-    override val url: String = byEnv(
-        dev = "jdbc:postgresql://localhost:5435/tgto",
-        prod = "jdbc:postgresql://tgto_database:5432/tgto"
-    ),
+    override val url: String = getenv("TGTO_JDBC_URL"),
     override val username: String = "tgto",
     override val password: String = "tgto",
     override val driverClassName: String = "org.postgresql.Driver"
 ) : DataSourceConfiguration
-
-fun <T> byEnv(dev: T, prod: T): T {
-    val env = getenv("SENTRY_ENVIRONMENT") ?: "dev"
-    return when (env) {
-        "prod" -> prod
-        "dev" -> dev
-        else -> throw RuntimeException("Set SENTRY_ENVIRONMENT either to 'dev' or 'prod'.")
-    }
-}

@@ -1,10 +1,12 @@
 # docker-compose -f docker-compose-dev.yml up -d
-version: "3.3"
+version: "2.4"
 services:
   tgto_database:
     image: postgres:10.5
     container_name: tgto_database
     restart: always
+    mem_limit: 128m
+    memswap_limit: 0m
     user: "${TGTO_SYSTEM_USER}"
     environment:
       POSTGRES_PASSWORD: "tgto"
@@ -14,7 +16,4 @@ services:
      - ${TGTO_DATA}/pgdata:/var/lib/postgresql/data
      - /etc/passwd:/etc/passwd:ro
     ports:
-    - target: 5432
-      published: 5435
-      protocol: tcp
-      mode: host
+      - "127.0.0.1:5435:5432"

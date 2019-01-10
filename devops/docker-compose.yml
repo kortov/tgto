@@ -1,9 +1,11 @@
-version: "3.3"
+version: "2.4"
 services:
   tgto:
     image: heapy/tgto:${TGTO_RELEASE}
     container_name: tgto
     restart: always
+    mem_limit: 256m
+    memswap_limit: 0m
     ports:
     - "8090:8080"
     environment:
@@ -11,15 +13,17 @@ services:
       TGTO_BOT_TOKEN: ${TGTO_BOT_TOKEN}
       TGTO_BOT_NAME: ${TGTO_BOT_NAME}
       TGTO_BASE_URL: ${TGTO_BASE_URL}
-      SENTRY_DSN: ${TGTO_SENTRY_DSN}
+      SENTRY_DSN: ${SENTRY_DSN}
       SENTRY_RELEASE: ${TGTO_RELEASE}
-      SENTRY_ENVIRONMENT: ${TGTO_ENV}
+      SENTRY_ENVIRONMENT: ${SENTRY_ENVIRONMENT}
     depends_on:
     - tgto_database
   tgto_database:
     image: postgres:10.5
     container_name: tgto_database
     restart: always
+    mem_limit: 128m
+    memswap_limit: 0m
     user: "${TGTO_SYSTEM_USER}"
     environment:
       POSTGRES_PASSWORD: "tgto"
