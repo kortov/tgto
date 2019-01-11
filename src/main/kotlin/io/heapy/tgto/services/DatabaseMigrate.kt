@@ -16,9 +16,9 @@ class FlywayDatabaseMigrate(
     private val dataSource: DataSource
 ) : DatabaseMigrate {
     override fun migrate() {
-        Flyway().also { flyway ->
-            flyway.dataSource = dataSource
-            flyway.migrate()
-        }
+        Flyway.configure()
+            .dataSource(dataSource)
+            .load()
+            .migrate()
     }
 }
