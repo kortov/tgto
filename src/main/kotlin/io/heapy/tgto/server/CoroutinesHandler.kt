@@ -3,7 +3,6 @@ package io.heapy.tgto.server
 import io.undertow.server.HttpHandler
 import io.undertow.server.HttpServerExchange
 import io.undertow.util.SameThreadExecutor
-import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
@@ -19,10 +18,7 @@ class CoroutinesHandler(
 ) : HttpHandler {
     override fun handleRequest(exchange: HttpServerExchange) {
         exchange.dispatch(SameThreadExecutor.INSTANCE, Runnable {
-            GlobalScope.launch(
-                context = context,
-                start = CoroutineStart.UNDISPATCHED
-            ) {
+            GlobalScope.launch(context = context) {
                 handler(exchange)
             }
         })
