@@ -1,6 +1,6 @@
 package io.heapy.tgto
 
-import io.heapy.integration.slf4j.logger
+import io.heapy.integration.logging.logger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking

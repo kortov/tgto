@@ -1,6 +1,9 @@
 package io.heapy.tgto.configuration
 
-import java.lang.System.getenv
+import io.heapy.komodo.config.dotenv.Dotenv
+import java.nio.file.Paths
+
+private val env = Dotenv(Paths.get("./devops/.env"))
 
 /**
  * Application Configuration
@@ -20,9 +23,9 @@ interface AppConfiguration {
  * @author Ruslan Ibragimov
  */
 class DefaultAppConfiguration(
-    override val token: String = getenv("TGTO_BOT_TOKEN"),
-    override val name: String = getenv("TGTO_BOT_NAME"),
-    override val baseUrl: String = getenv("TGTO_BASE_URL"),
+    override val token: String = env.get("TGTO_BOT_TOKEN"),
+    override val name: String = env.get("TGTO_BOT_NAME"),
+    override val baseUrl: String = env.get("TGTO_BASE_URL"),
     override val ds: DataSourceConfiguration = DefaultDataSourceConfiguration()
 ) : AppConfiguration
 
@@ -44,7 +47,7 @@ interface DataSourceConfiguration {
  * @author Ruslan Ibragimov
  */
 class DefaultDataSourceConfiguration(
-    override val url: String = getenv("TGTO_JDBC_URL"),
+    override val url: String = env.get("TGTO_JDBC_URL"),
     override val username: String = "tgto",
     override val password: String = "tgto",
     override val driverClassName: String = "org.postgresql.Driver"

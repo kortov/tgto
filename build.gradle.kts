@@ -44,7 +44,8 @@ dependencies {
     compile("com.atlassian.commonmark:commonmark:$commonmarkVersion")
 
     compile("io.heapy.komodo:komodo-core-concurrent:$komodoVersion")
-    compile("io.heapy.komodo.integration:komodo-slf4j:$komodoVersion")
+    compile("io.heapy.komodo:komodo-config-dotenv:$komodoVersion")
+    compile("io.heapy.komodo.integration:komodo-logging:$komodoVersion")
     compile("io.heapy.komodo.integration:komodo-datasource-hikaricp:$komodoVersion")
 
     compile("ch.qos.logback:logback-classic:$logbackVersion")

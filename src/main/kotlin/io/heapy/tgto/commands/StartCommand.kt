@@ -1,11 +1,11 @@
 package io.heapy.tgto.commands
 
+import io.heapy.integration.logging.logger
 import io.heapy.tgto.ResponseChannel
 import io.heapy.tgto.UniquePathGenerator
 import io.heapy.tgto.UserInfo
 import io.heapy.tgto.dao.CUserDao
 import io.heapy.tgto.db.tables.pojos.TgUser
-import io.heapy.integration.slf4j.logger
 import org.telegram.telegrambots.meta.api.objects.Update
 
 /**
@@ -45,5 +45,7 @@ class StartCommand(
         )
     }
 
-    private val LOGGER = logger<StartCommand>()
+    companion object {
+        private val LOGGER = logger<StartCommand>()
+    }
 }

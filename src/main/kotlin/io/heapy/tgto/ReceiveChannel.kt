@@ -1,8 +1,8 @@
 package io.heapy.tgto
 
+import io.heapy.integration.logging.logger
 import io.heapy.tgto.commands.Command
 import io.heapy.tgto.coroutines.serverContext
-import io.heapy.integration.slf4j.logger
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.channels.actor

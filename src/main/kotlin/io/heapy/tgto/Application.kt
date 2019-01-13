@@ -1,5 +1,6 @@
 package io.heapy.tgto
 
+import io.heapy.integration.logging.logger
 import io.heapy.tgto.commands.MyUrlCommand
 import io.heapy.tgto.commands.NewUrlCommand
 import io.heapy.tgto.commands.PingPongCommand
@@ -8,15 +9,14 @@ import io.heapy.tgto.commands.StartCommand
 import io.heapy.tgto.configuration.DefaultAppConfiguration
 import io.heapy.tgto.dao.DefaultCMessageDao
 import io.heapy.tgto.dao.DefaultCUserDao
+import io.heapy.tgto.db.tables.daos.MessageDao
+import io.heapy.tgto.db.tables.daos.TgUserDao
 import io.heapy.tgto.server.UndertowFeedServer
 import io.heapy.tgto.services.CommonMarkMarkdownService
 import io.heapy.tgto.services.DefaultJooqConfigFactory
 import io.heapy.tgto.services.FlywayDatabaseMigrate
 import io.heapy.tgto.services.HikariDataSourceFactory
 import io.heapy.tgto.services.RomeFeedBuilder
-import io.heapy.tgto.db.tables.daos.MessageDao
-import io.heapy.tgto.db.tables.daos.TgUserDao
-import io.heapy.integration.slf4j.logger
 import org.telegram.telegrambots.ApiContextInitializer
 import org.telegram.telegrambots.meta.TelegramBotsApi
 
