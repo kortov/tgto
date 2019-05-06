@@ -9,6 +9,7 @@ import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.launch
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage
 import org.telegram.telegrambots.meta.api.objects.Update
 
 /**
@@ -37,6 +38,12 @@ class TgtoBot(
 
         GlobalScope.launch(serverContext) {
             receiveChannel.send(update)
+
+            // Delete message after receive
+            coExecute(DeleteMessage(
+                update.message.chatId,
+                update.message.messageId
+            ))
         }
     }
 }
