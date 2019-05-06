@@ -1,6 +1,7 @@
 package io.heapy.tgto.services
 
 import org.jooq.Configuration
+import org.jooq.SQLDialect
 import org.jooq.impl.DefaultConfiguration
 import javax.sql.DataSource
 
@@ -18,6 +19,7 @@ class DefaultJooqConfigFactory(
 ) : JooqConfigFactory {
     override fun config(): Configuration {
         return DefaultConfiguration().also {
+            it.setSQLDialect(SQLDialect.POSTGRES)
             it.setDataSource(dataSource)
         }
     }
