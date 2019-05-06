@@ -15,7 +15,7 @@ interface CMessageDao {
     suspend fun list(userId: Long, limit: Int): List<Message>
 }
 
-class DefaultCMessageDao constructor(
+class DefaultCMessageDao(
     private val messageDao: MessageDao
 ) : CMessageDao {
 
