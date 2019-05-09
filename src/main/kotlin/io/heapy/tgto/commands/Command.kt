@@ -9,5 +9,5 @@ import org.telegram.telegrambots.meta.api.objects.Update
  */
 interface Command {
     val name: String
-    suspend fun handler(update: Update)
+    suspend fun handler(update: Update): List<TgAction>
 }

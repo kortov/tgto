@@ -57,23 +57,20 @@ object Application {
 
             UndertowFeedServer(shutdownManager, userDao, feedBuilder, messageDao, markdownService).run()
 
-            val responseChannel = DefaultResponseChannel()
+            val saveCommand = SaveCommand(messageDao)
+            val myUrlCommand = MyUrlCommand(userDao, userInfo)
+            val newUrlCommand = NewUrlCommand(userDao, uniquePathGenerator, userInfo)
+            val startCommand = StartCommand(userDao, uniquePathGenerator, userInfo)
+            val pingPongCommand = PingPongCommand()
 
-            val saveCommand = SaveCommand(messageDao, responseChannel)
-            val myUrlCommand = MyUrlCommand(userDao, responseChannel, userInfo)
-            val newUrlCommand = NewUrlCommand(userDao, responseChannel, uniquePathGenerator, userInfo)
-            val startCommand = StartCommand(userDao, responseChannel, uniquePathGenerator, userInfo)
-            val pingPongCommand = PingPongCommand(responseChannel)
-
-            val receiveChannel = ActorReceiveChannel(
+            val commandExecutor = DefaultCommandExecutor(
                 commands = listOf(myUrlCommand, newUrlCommand, startCommand, pingPongCommand),
                 fallbackCommand = saveCommand
             )
 
             val tgBot = TgtoBot(
                 appConfiguration = appConfiguration,
-                receiveChannel = receiveChannel.channel,
-                responseChannel = responseChannel.channel,
+                commandExecutor = commandExecutor,
                 shutdownManager = shutdownManager
             )
 

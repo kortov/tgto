@@ -1,6 +1,5 @@
 package io.heapy.tgto.commands
 
-import io.heapy.tgto.ResponseChannel
 import io.heapy.tgto.dao.CMessageDao
 import io.heapy.tgto.db.tables.pojos.Message
 import org.telegram.telegrambots.meta.api.objects.Update
@@ -13,12 +12,11 @@ import java.time.Instant
  * @author Ruslan Ibragimov
  */
 class SaveCommand(
-    private val messageDao: CMessageDao,
-    private val responseChannel: ResponseChannel
+    private val messageDao: CMessageDao
 ) : Command {
     override val name = "/save"
 
-    override suspend fun handler(update: Update) {
+    override suspend fun handler(update: Update): List<TgAction> {
         val message = update.message
         val userId = message.from.id.toLong()
 
@@ -30,9 +28,12 @@ class SaveCommand(
 
         messageDao.insert(dbMessage)
 
-        responseChannel.send(
-            chatId = message.chatId,
-            message = """Message "${message.text}" saved."""
+        return listOf(
+            SendMessageAction(
+                chatId = message.chatId,
+                message = """Message "${message.text}" saved."""
+            ),
+            update.deleteAction()
         )
     }
 }

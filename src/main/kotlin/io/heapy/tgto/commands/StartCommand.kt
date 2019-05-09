@@ -1,7 +1,6 @@
 package io.heapy.tgto.commands
 
 import io.heapy.integration.logging.logger
-import io.heapy.tgto.ResponseChannel
 import io.heapy.tgto.UniquePathGenerator
 import io.heapy.tgto.UserInfo
 import io.heapy.tgto.dao.CUserDao
@@ -15,13 +14,12 @@ import org.telegram.telegrambots.meta.api.objects.Update
  */
 class StartCommand(
     private val userDao: CUserDao,
-    private val responseChannel: ResponseChannel,
     private val pathGenerator: UniquePathGenerator,
     private val userInfo: UserInfo
 ) : Command {
     override val name = "/start"
 
-    override suspend fun handler(update: Update) {
+    override suspend fun handler(update: Update): List<TgAction> {
         LOGGER.info("""User "${update.message.from.userName}" join.""")
 
         val userId = update.message.from.id.toLong()
@@ -34,14 +32,15 @@ class StartCommand(
             }
         }
 
-        val chatId = update.message.chatId
-        responseChannel.send(
-            chatId = chatId,
-            message = "Hello! Here your rss feed. Just send me messages, and they'll appear in your personal feed."
-        )
-        responseChannel.send(
-            chatId = chatId,
-            message = userInfo.getFeedUrl(user)
+        return listOf(
+            SendMessageAction(
+                chatId = update.message.chatId,
+                message = "Hello! Here your rss feed. Just send me messages, and they'll appear in your personal feed."
+            ),
+            SendMessageAction(
+                chatId = update.message.chatId,
+                message = userInfo.getFeedUrl(user)
+            )
         )
     }
 
