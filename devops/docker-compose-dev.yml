@@ -16,4 +16,4 @@ services:
      - ${TGTO_DATA}/pgdata:/var/lib/postgresql/data
      - /etc/passwd:/etc/passwd:ro
     ports:
-      - "127.0.0.1:5435:5432"
+      - "127.0.0.1:5436:5432"
