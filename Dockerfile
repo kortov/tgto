@@ -1,4 +1,4 @@
 # Container with application
-FROM openjdk:11.0.1-jre-slim-stretch
+FROM amazoncorretto:11.0.3
 COPY /build/install/tgto /tgto
 ENTRYPOINT /tgto/bin/tgto
